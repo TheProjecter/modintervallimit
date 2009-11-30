@@ -1,0 +1,88 @@
+#summary Configuration Directives
+
+= Configuration Directives =
+
+All the directives below may be specified in anywhere like Server, !VirtualHost, Location, and so on.
+
+== !IntervalLimitEngine ==
+
+|| *Description* || Set "On" to enable interval_limit, "Off" to disable. Default "Off" ||
+|| *Syntax* || !IntervalLimitEngine On/Off  || 
+|| *Context* ||  server config, virtual host, directory, .htaccess ||
+|| *Status* || Extension ||
+|| *Module* || mod_interval_limit ||
+
+== !IntervalLimitCookieName ==
+
+|| *Description* || Set key name of cookie so as for the cookie value to be used for user's identification. <br> It is required when "cookie" is choosed as a user identifier in IntervalLimitRule directive. ||
+|| *Syntax* || !IntervalLimitCookieName cookieName || 
+|| *Context* ||  server config, virtual host, directory, .htaccess ||
+|| *Status* || Extension ||
+|| *Module* || mod_interval_limit ||
+
+== !IntervalLimitMemcachedAddrPort ==
+
+|| *Description* || Liste of the memcached address. each address is ip or host <br> adresse(s) and port ':' separated. The addresses are ',' coma separated. <br> For example: <br> 192.168.1.1:11211,192.168.1.2:11211 ||
+|| *Syntax* || !IntervalLimitMemcachedAddrPort host1:port1,host2:port2,..  || 
+|| *Context* ||  server config, virtual host, directory, .htaccess ||
+|| *Status* || Extension ||
+|| *Module* || mod_interval_limit ||
+
+== !IntervalLimitRule ==
+
+|| *Description* || Set an interval limit rule line. Multiple rules can be defined at once. <br>Maximum number of rules is 5, and if you define more than 5 rules, <br>you will get error message in configuration process.<br> @see *IntervalLimitRule Format* below for the detail of rule line format. ||
+|| *Syntax* || !IntervalLimitRule rule  || 
+|| *Context* ||  server config, virtual host, directory, .htaccess ||
+|| *Status* || Extension ||
+|| *Module* || mod_interval_limit ||
+
+<br>
+<br>
+
+= IntervalLimitRule Format=
+
+== IntervalLimitRule `<`rule_name`>` `<`type:ip|cookie`>` `<`max event`>` `<`interval(sec)`>` `<`block period(sec)`>` `<`block:1|0`>` ==
+
+|| *NAME*        || *VALUE* ||  *DESCRIPTION* ||
+|| *rule name* ||  || The name of rule. each name must be unique. ||
+|| *type*  || *ip* or *cookie* || The type of user identifier. the value must be either ip or cookie. <br> - *ip* : ip address of incomming request. <br> - *cookie* : cookie value of incomming request.<br> `[`note`]` If cookie is choosed, the key name of cookie must be specified with *IntervalLimitCookieName* directive.||
+|| *max event* || *1* -  || The maximum number of events allowed to access in the certain period of time, *`<`interval`>`* ||
+|| *interval*  || seconds ||The time interval, in seconds, at which the number of event counter will be checked. ||
+|| *block period* || seconds || The time period, in seconds, during which a requesting user is considered as <br>"exceeded threshold" if the user's interval event counter exceeds *`<`max event`>`*.<br> If *`<`block`>`* is equal to *1*, the requesting user's access is blocked as *HTTP_SERVICE_UNAVAILABLE* <br> during the block period. After the block period, the counter is reset to 0.||
+|| *block* || *1* or *0* || must be either *1* or *0*. <br> - *1*  : block the user access as *HTTP_SERVICE_UNAVAILABLE* during the block period. <br>- *0*  : NOT block the user access during the block period. <br>this means nothing change even if the user's interval event counter exceeds the threshold.||
+
+== EXAMPLES of IntervalLimitRule ==
+{{{
+    ex1.
+    IntervalLimitRule rule_ip1 ip 10 60 60 1
+    #------------------------------------------------------------
+    # rule name        : "rule_ip1"
+    # user identifier  : "ip"
+    # max event        : 10
+    # interval         : 60 sec
+    # block period     : 60 sec
+    # block            : 1 - block the user access
+    #------------------------------------------------------------
+
+    ex2.
+    IntervalLimitRule rule_ip2 ip 100 3600 3600 0
+    #------------------------------------------------------------
+    # rule name        : "rule_ip2"
+    # user identifier  : "ip"
+    # max event        : 100
+    # interval         : 3600 sec (1hr)
+    # block period     : 3600 sec (1hr)
+    # block            : 0 - NOT block
+    #------------------------------------------------------------
+
+    ex3.
+    IntervalLimitRule rule_cookie1 cookie 10 60 60 1
+    #------------------------------------------------------------
+    # rule name        : "rule_cookie1"
+    # user identifier  : "cookie"
+    # max event        : 10
+    # interval         : 60 sec
+    # block period     : 60 sec
+    # block            : 1 - block the user access
+    #------------------------------------------------------------
+}}}
