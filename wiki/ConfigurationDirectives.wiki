@@ -39,9 +39,9 @@ All the directives below may be specified in anywhere like Server, !VirtualHost,
 <br>
 <br>
 
-= IntervalLimitRule Format=
+= !IntervalLimitRule Format=
 
-== IntervalLimitRule `<`rule_name`>` `<`type:ip|cookie`>` `<`max event`>` `<`interval(sec)`>` `<`block period(sec)`>` `<`block:1|0`>` ==
+== !IntervalLimitRule `<`rule_name`>` `<`type:ip|cookie`>` `<`max event`>` `<`interval(sec)`>` `<`block period(sec)`>` `<`block:1|0`>` ==
 
 || *NAME*        || *VALUE* ||  *DESCRIPTION* ||
 || *rule name* ||  || The name of rule. each name must be unique. ||
@@ -51,7 +51,7 @@ All the directives below may be specified in anywhere like Server, !VirtualHost,
 || *block period* || seconds || The time period, in seconds, during which a requesting user is considered as <br>"exceeded threshold" if the user's interval event counter exceeds *`<`max event`>`*.<br> If *`<`block`>`* is equal to *1*, the requesting user's access is blocked as *HTTP_SERVICE_UNAVAILABLE* <br> during the block period. After the block period, the counter is reset to 0.||
 || *block* || *1* or *0* || must be either *1* or *0*. <br> - *1*  : block the user access as *HTTP_SERVICE_UNAVAILABLE* during the block period. <br>- *0*  : NOT block the user access during the block period. <br>this means nothing change even if the user's interval event counter exceeds the threshold.||
 
-== EXAMPLES of IntervalLimitRule ==
+== EXAMPLES of !IntervalLimitRule ==
 {{{
     ex1.
     IntervalLimitRule rule_ip1 ip 10 60 60 1
