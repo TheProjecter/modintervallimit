@@ -30,7 +30,7 @@ All the directives below may be specified in anywhere like Server, !VirtualHost,
 
 == !IntervalLimitRule ==
 
-|| *Description* || Set an interval limit rule line. Multiple rules can be defined at once. <br>Maximum number of rules is 5, and if you define more than 5 rules, <br>you will get error message in configuration process.<br> @see *IntervalLimitRule Format* below for the detail of rule line format. ||
+|| *Description* || Set an interval limit rule line. Multiple rules can be defined at once. <br>Maximum number of rules is 5, and if you define more than 5 rules, <br>you will get error message in configuration process.<br> @see *!IntervalLimitRule Format* below for the detail of rule line format. ||
 || *Syntax* || !IntervalLimitRule rule  || 
 || *Context* ||  server config, virtual host, directory, .htaccess ||
 || *Status* || Extension ||
@@ -45,7 +45,7 @@ All the directives below may be specified in anywhere like Server, !VirtualHost,
 
 || *NAME*        || *VALUE* ||  *DESCRIPTION* ||
 || *rule name* ||  || The name of rule. each name must be unique. ||
-|| *type*  || *ip* or *cookie* || The type of user identifier. the value must be either ip or cookie. <br> - *ip* : ip address of incomming request. <br> - *cookie* : cookie value of incomming request.<br> `[`note`]` If cookie is choosed, the key name of cookie must be specified with *IntervalLimitCookieName* directive.||
+|| *type*  || *ip* or *cookie* || The type of user identifier. the value must be either ip or cookie. <br> - *ip* : ip address of incomming request. <br> - *cookie* : cookie value of incomming request.<br> `[`note`]` If cookie is choosed, the key name of cookie must be specified with *!IntervalLimitCookieName* directive.||
 || *max event* || *1* -  || The maximum number of events allowed to access in the certain period of time, *`<`interval`>`* ||
 || *interval*  || seconds ||The time interval, in seconds, at which the number of event counter will be checked. ||
 || *block period* || seconds || The time period, in seconds, during which a requesting user is considered as <br>"exceeded threshold" if the user's interval event counter exceeds *`<`max event`>`*.<br> If *`<`block`>`* is equal to *1*, the requesting user's access is blocked as *HTTP_SERVICE_UNAVAILABLE* <br> during the block period. After the block period, the counter is reset to 0.||
