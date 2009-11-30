@@ -7,4 +7,5 @@
 || *[http://www.danga.com/memcached/ memcached]* || used as block floag and count storage. ||
 || *[http://tangent.org/552/libmemcached.html libmemcached]* || needed to compile mod_interval_limit ||
 
+*`[`note`]`*<br>
 * memcached-1.4.0 or up, which implements binary protocol, is highly recommended for performance reanson.*
