@@ -2,10 +2,8 @@
 
 = Logging Names of Threshold Exceeded Rules =
 
-The name of rules that threshold exceeded are added to http header table with the key name of *threshold_exceeded_rules*.
-
+The name of rules that threshold exceeded are added to http header table with the key name of *threshold_exceeded_rules*.<br>
 Therefore, you can add the counter info to the [http://httpd.apache.org/docs/2.0/en/mod/mod_log_config.html CustomLog] by adding the *%{threshold_exceeded_rules}i* string to log format string of !CustomLog directive.
-
 
 !CustomLog Format Example:
 {{{
