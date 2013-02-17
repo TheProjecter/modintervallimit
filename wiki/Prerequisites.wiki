@@ -5,7 +5,8 @@
 || software || description ||
 || *[http://www.monkey.org/~provos/libevent/ libevent]* ||  used by memcached ||
 || *[http://www.danga.com/memcached/ memcached]* || used as block floag and count storage. ||
-|| *[http://tangent.org/552/libmemcached.html libmemcached]* || needed to compile mod_interval_limit ||
+|| *[http://libmemcached.org/libMemcached.html libmemcached]* || used as memcached c client library ||
 
 *`[`note`]`*<br>
-* memcached-1.4.0 or up, which implements binary protocol, is highly recommended for performance reanson.*
+* - memcached-1.4.0 or up, which implements binary protocol, is highly recommended for performance reanson.* <br>
+* - Use libmemcached-0.38 or up for mod_interval_limit-1.0.1 or up *
